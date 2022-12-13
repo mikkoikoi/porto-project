@@ -1,7 +1,10 @@
 // refactor passed
 import React from "react";
-import { Row, Col, Layout, Typography } from "antd";
-import { PhoneOutlined, EnvironmentOutlined } from "@ant-design/icons";
+import { Row, Col, Layout, Typography, Menu, Button, Affix } from "antd";
+import { HomeFilled, AccountBookFilled, BellFilled  } from "@ant-design/icons";
+import URLS from "@/src/enums/urls";
+import { useNavigate } from "react-router-dom";
+
 
 const { Text, Title } = Typography;
 const { Footer } = Layout;
@@ -10,38 +13,44 @@ const FooterComponent = () => {
   const helpDeskEmail = "helpdesk@mca.id";
   const helpDeskPhoneNumber = "+62 543-7777-9999";
 
+const navigate = useNavigate()
+  const navAccount = () => {
+    navigate(URLS.AKUN)
+  }
+
   return (
-    <Footer className="Footer">
-      <Row className="gutter-24" justify="center">
-        <Col xs={24} sm={24} md={12} lg={12} xl={12} xxl={12}>
-          <Row className="gutter-12">
-            <Col xs={4} sm={4} md={4} lg={4} xl={2} xxl={2}>
-              <PhoneOutlined
+    <Affix offsetBottom={0}>
+      <Footer
+        style={{
+          position: "sticky",
+        }}
+        className="Footer"
+      >
+        <Row className="gutter-24" justify="center">
+          <Col xs={24} sm={24} md={12} lg={12} xl={12} xxl={12}>
+            <Row>
+              <Col
+                className="gutter-12"
                 style={{
-                  fontSize: "185%",
-                }}
-              />
-            </Col>
-            <Col span={14}>
-              <div
-                style={{
+                  top: 0,
+                  zIndex: 1,
+                  flexDirection: "row",
                   display: "flex",
-                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  minHeight: "1rem",
                 }}
               >
-                <Text style={{ fontSize: "16px" }}>{helpDeskPhoneNumber}</Text>
-                <a
-                  href={`mailto:${helpDeskEmail}`}
-                  style={{ fontSize: "16px" }}
-                >
-                  {helpDeskEmail}
-                </a>
-              </div>
-            </Col>
-          </Row>
-        </Col>
-      </Row>
-    </Footer>
+                <Button size="large" icon={<HomeFilled />} />
+                <Button size="large" icon={<AccountBookFilled />} />
+                <Button size="large" icon={<BellFilled />} />
+                <Button onClick={navAccount} size="large" icon={<HomeFilled />} />
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      </Footer>
+    </Affix>
   );
 };
 
